@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+
 class Gene:
     def __init__(self, segments: list[GeneSegment]):
         self.segments = segments
@@ -75,3 +77,10 @@ neurons = [Neuron(...)]
 number_of_steps = 100
 for step in range(number_of_steps):
     simulation_step(genes, proteins, factors, neurons)
+
+
+
+    def calculate_sha256_hash(data):
+        data_bytes = str(data).encode('utf-8')
+        sha256_hash = hashlib.sha256(data_bytes).hexdigest()
+        return sha256_hash
