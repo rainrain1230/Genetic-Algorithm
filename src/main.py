@@ -1,17 +1,24 @@
-import hashlib
-class GeneSegment:
-    def __init__(self, identifier: str, quantity: float):
-        self.identifier = identifier
-        self.quantity = quantity
+from __future__ import annotations
 
 class Gene:
     def __init__(self, segments: list[GeneSegment]):
         self.segments = segments
 
-class Protein:
+class GeneSegment:
     def __init__(self, identifier: str, quantity: float):
         self.identifier = identifier
         self.quantity = quantity
+
+class Protein:
+    def __init__(self, identifier: str, quantity: float, reactions: list[Reaction], neurons: list[Neuron]):
+        self.identifier = identifier
+        self.quantity = quantity
+        self.reactions = reactions
+        self.neurons = neurons
+
+class TranslativeProtein(Protein):
+    def __init__(self, identifier: str, quantity: float, reactions: list[Reaction], neurons: list[Neuron]):
+        super().__init__(identifier, quantity, reactions, neurons)
 
 class Factor:
     def __init__(self, identifier: str, quantity: float):
@@ -22,8 +29,22 @@ class Neuron:
     def __init__(self, input_hash: str, output_hash: str):
         self.input_hash = input_hash
         self.output_hash = output_hash
+        self.potential = 0
 
-def react(reactant: list[Protein|Factor], catalyst: list[Protein|Factor] = None):
+class Reaction:
+    def __init__(self, reactants: list[Protein|Factor], catalysts: list[GeneSegment|Protein|Factor], products: list[Protein|Factor]):
+        self.reactants = reactants
+        self.catalysts = catalysts
+        self.products = products
+
+class Simulation:
+    def __init__(self, gene: Gene):
+        self.gene = gene
+        self.proteins = []
+        self.factors = []
+        self.neurons = []
+
+def _react(reactant: list[Protein|Factor], catalyst: list[Protein|Factor] = None):
     # Implement reaction logic here
     # For example, produce a product based on the reactant and catalyst
     pass
