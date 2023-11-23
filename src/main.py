@@ -80,7 +80,7 @@ for step in range(number_of_steps):
 
 
 
-    def calculate_sha256_hash(data):
-        data_bytes = str(data).encode('utf-8')
-        sha256_hash = hashlib.sha256(data_bytes).hexdigest()
-        return sha256_hash
+def calculate_sha256_hash(data):
+    data_bytes = str(data).encode('utf-8')
+    sha256_hash = hashlib.sha256(data_bytes).hexdigest()
+    return sha256_hash
